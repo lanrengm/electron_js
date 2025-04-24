@@ -1,0 +1,43 @@
+{
+  "name": "crown",
+  "version": "1.0.0",
+  "description": "Crown Test.",
+  "author": {
+    "name": "lanren",
+    "email": "lanrengm@gmail.com",
+    "url": "https://github.com/lanrengm"
+  },
+  "main": "src/main/main.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "electron .",
+    "test": "electron-builder --dir",
+    "build": "electron-builder --win"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electron": "35.2.1",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "com.example.crown",
+    "productName": "Crown",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/crown_256.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "license": "LICENSE.txt"
+    }
+  }
+}
