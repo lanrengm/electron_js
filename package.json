@@ -12,7 +12,7 @@
   "private": true,
   "scripts": {
     "dev": "electron .",
-    "test": "electron-builder --dir",
+    "prebuild": "electron-builder --dir",
     "build": "electron-builder --win"
   },
   "dependencies": {
@@ -27,6 +27,9 @@
     "directories": {
       "output": "dist"
     },
+	"files": [],
+	"extraResources": [
+	],
     "win": {
       "target": "nsis",
       "icon": "public/crown_256.ico",

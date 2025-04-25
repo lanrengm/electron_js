@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron');
 const path = require('path');
 
-const MAIN_ICON = 'public/crown_256.ico';
+const MAIN_ICON = path.join(app.getAppPath(), 'public/crown_256.ico');
 
 const mainLoop = ()=> {
     const mainWindow = new BrowserWindow({
@@ -9,10 +9,12 @@ const mainLoop = ()=> {
         height: 600,
         icon: MAIN_ICON,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),  // 加载预加载脚本
-            // preload: '/src/preload/preload.js',
-            contextIsolation: true,  // 启用上下文隔离
+			nodeIntegration: false,
+			contextIsolation: true,  // 启用上下文隔离
             sandbox: true, // 启用沙箱
+			webSecurity: true,
+			enableRemoteModule: false,
+            preload: path.join(app.getAppPath(), 'src/preload/preload.js'),  // 加载预加载脚本
         }
     });
     mainWindow.loadFile('src/render/index.html');
