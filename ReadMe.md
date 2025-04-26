@@ -70,19 +70,18 @@ node_modules 目录体积 552 M。
 
 ### 3. 预构建
 
-第一次执行时会下载 electron-builder 打包用的缓存资源。
-
-11 代 i3 win 11 第一次执行该步骤用了 107 秒；后续执行只需要 6 秒。
-
 ```cmd
 yarn run prebuild
 ```
 
 构建 windows 安装包的部分预构建缓存 282 M。
 
-### 4. 打包发行
+第一次执行时会下载 electron-builder 打包用的缓存资源。
 
-11 代 13 win 11 执行该步骤用了 50 秒。
+11 代 i3 win 11 第一次执行该步骤用了 107 秒；后续执行只需要 8 秒。
+4 代 i3 win 10 后续执行需要 20 秒。
+
+### 4. 打包发行
 
 ```cmd
 yarn run build
@@ -90,6 +89,12 @@ yarn run build
 
 windows 安装包体积 81 M。
 
+11 代 i3 win 11 执行该步骤用了 50 秒。
+4 代 i3 win 10 执行该步骤用时 78 秒。
+
+### 5. 热重载工具
+
+electron-reloader 1.2.3
 
 ## Icons
 

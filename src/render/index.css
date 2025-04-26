@@ -1,0 +1,11 @@
+.my-form {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: auto 100px;
+    gap: 10px;
+    /* justify-items: stretch; */
+    align-items: center;
+}
+.my-form > input {
+    margin: 0
+}

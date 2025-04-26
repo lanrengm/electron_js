@@ -1,9 +1,27 @@
 const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron');
 const path = require('path');
+const { spawn } = require('child_process');
+
+const { Get } = require('./spider.js');
+
+//Begin: electron-reloader 热重载
+try {
+    require('electron-reloader')(module, {
+      debug: true,  // 打印重载日志
+      watchRenderer: true,  // 监听渲染进程文件
+      ignore: [
+        'node_modules',
+        'dist'
+      ]
+    });
+} catch (error) {
+    console.log('热重载未启用（生产环境）');
+}
+//End: electron-reloader 热重载
 
 const MAIN_ICON = path.join(app.getAppPath(), 'public/crown_256.ico');
 
-const mainLoop = ()=> {
+function createMainWindow() {
     const mainWindow = new BrowserWindow({
         windth: 800,
         height: 600,
@@ -37,6 +55,10 @@ const mainLoop = ()=> {
             mainWindow.hide();  // 隐藏窗口
         }
     });
+    return mainWindow;
+}
+
+function createTray(mainWindow) {
     // 托盘
     const tray = new Tray(MAIN_ICON);
     tray.setToolTip('Crown');
@@ -55,13 +77,26 @@ const mainLoop = ()=> {
         }}
     ]);
     tray.setContextMenu(trayMenu);
+}
+
+function registrySearch() {
+    // search response
+    ipcMain.on('search-request', (event, data) => {
+        // event.sender.send('search-response', `${data}, OK!`);
+        Get(data, event.sender.send.bind(event.sender, 'search-response'));
+    });
+}
+
+function mainLoop() {
+    const mainWindow = createMainWindow();
+    createTray(mainWindow);
 
     // 渲染进程通信
     ipcMain.on('msg-cmd', (event, data) => {
         console.log(data);
-        mainWindow.webContents.send('msg-cmd', 'ready');
+        mainWindow.webContents.send('msg-cmd', `ready: ${data}`);
     });
+    registrySearch();
 }
-
 
 app.whenReady().then(mainLoop);

@@ -16,14 +16,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crown</title>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="./assets/pico.min.css">
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <div>
+    <nav>
+        <div></div>
         <button id="reload-btn">reload</button>
-    </div>
-    <input type="text" name="" id="input-cmd">
-    <button id="btn-cmd">启动</button>
-    <div id="log-cmd"></div>
+    </nav>
+    <main class="container-fluid">
+        <div>
+            <h2>location</h2>
+            <div class="my-form">
+                <input type="text" id="search-input">
+                <button id="search-button">Search</button>
+            </div>
+        </div>
+
+        <div>
+            <h2>Content</h2>
+            <pre id="content"></pre>
+        </div>
+    </main>
 </body>
 </html>
